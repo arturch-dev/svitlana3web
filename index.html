@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Безкоштовний 3-х денний інтенсив</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        beige: '#f5f3f0',
+                        dark: '#2c2a29',
+                        brand: '#9c6b65', // Колір кнопок зі скріншоту
+                        brandHover: '#8a5c56'
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    
+    <!-- Intl Tel Input CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/css/intlTelInput.css">
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'YOUR_PIXEL_ID'); // ЗАМІНІТЬ НА ВАШ ID ПІКСЕЛЯ
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <style>
+        body { font-family: 'Montserrat', sans-serif; background-color: #f5f3f0; color: #2c2a29; }
+        .hero-bg {
+            /* ЗАМІНІТЬ ШЛЯХ ДО ФОТО 1 БЛОКУ */
+            background-image: linear-gradient(rgba(44, 42, 41, 0.7), rgba(44, 42, 41, 0.7)), url('hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        .iti { width: 100%; } /* Fix for phone input width */
+        .modal-open { overflow: hidden; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- БЛОК 1: Hero -->
+    <section class="hero-bg text-white min-h-screen flex flex-col justify-center items-center text-center px-4 py-20">
+        <div class="bg-brand text-white px-4 py-1 rounded-full text-sm font-semibold mb-6 uppercase tracking-wider">
+            Безкоштовний 3-х денний інтенсив
+        </div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold max-w-4xl leading-tight mb-6">
+            Прокинься через 3 дні з обличчям, яке тобі нарешті сподобається
+        </h1>
+        <p class="text-lg md:text-xl max-w-2xl mb-10 text-gray-200">
+            Безкоштовний 3-денний інтенсив, де ти своїми руками прибереш набряки, піднімеш овал і побачиш перші зміни — навіть якщо в тебе 10 хвилин на день, двоє дітей і нуль досвіду
+        </p>
+        <button onclick="openModal()" class="bg-brand hover:bg-brandHover text-white text-lg font-bold py-4 px-10 rounded-full transition duration-300 shadow-lg transform hover:scale-105">
+            Доєднатися
+        </button>
+    </section>
+
+    <!-- БЛОК 2: Знайомо? -->
+    <section class="py-20 px-4 max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-dark">Знайомо?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white p-8 rounded-2xl shadow-sm">
+                <h3 class="text-xl font-bold mb-3 text-brand">Прокидаєшся — а обличчя “не твоє”</h3>
+                <p class="text-gray-600">Зранку в дзеркалі набряки, “мʼятість”, важкість. До обіду ніби стає краще, але наступного дня — те саме.</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-sm">
+                <h3 class="text-xl font-bold mb-3 text-brand">Щось робиш — але без змін</h3>
+                <p class="text-gray-600">Пробувала масаж, тейпи, вправи з відео. Іноді є ефект, але він швидко зникає. І здається, що це просто “не працює”.</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-sm">
+                <h3 class="text-xl font-bold mb-3 text-brand">Обличчя виглядає втомленим</h3>
+                <p class="text-gray-600">Це відбувається навіть коли ти виспалась і відпочила. Контур стає менш чітким, зʼявляється відчуття “важкого” обличчя. І ти ніби виглядаєш гірше, ніж відчуваєш себе.</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-sm">
+                <h3 class="text-xl font-bold mb-3 text-brand">Хаос замість розуміння</h3>
+                <p class="text-gray-600">Сьогодні одна техніка, завтра інша. Немає чіткого розуміння, що саме працює для тебе. І через це — немає стабільних змін.</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-sm md:col-span-2">
+                <h3 class="text-xl font-bold mb-3 text-brand text-center">Думки про “радикальні рішення”</h3>
+                <p class="text-gray-600 text-center max-w-3xl mx-auto">Іноді зʼявляється думка: “може вже уколи?”. Але всередині є відчуття, що це не той шлях. Хочеться вирішити це природно — але не зрозуміло як.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- БЛОК 3: Програма -->
+    <section class="bg-dark py-20 px-4 text-beige">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Програма інтенсиву</h2>
+            
+            <div class="space-y-8 mb-12">
+                <div class="border border-gray-600 p-8 rounded-2xl relative">
+                    <div class="absolute -top-4 left-8 bg-brand text-white px-4 py-1 rounded-full font-bold text-sm">ДЕНЬ 1</div>
+                    <h3 class="text-2xl font-bold mb-3 mt-2">“Обличчя старіє вночі”</h3>
+                    <p class="text-gray-300">Чому ти прокидаєшся з набряками і «мʼятим» обличчям — навіть якщо доглядаєш за собою. І що зробити, щоб уже завтра вранці побачити в дзеркалі свіже обличчя.</p>
+                </div>
+
+                <div class="border border-gray-600 p-8 rounded-2xl relative">
+                    <div class="absolute -top-4 left-8 bg-brand text-white px-4 py-1 rounded-full font-bold text-sm">ДЕНЬ 2</div>
+                    <h3 class="text-2xl font-bold mb-3 mt-2">"Як ти псуєш своє обличчя”</h3>
+                    <p class="text-gray-300">Чому ти робиш масаж, вправи і тейпи, але обличчя не змінюється або швидко “відкочується” назад і як почати бачити зміни вже за кілька днів.</p>
+                </div>
+
+                <div class="border border-gray-600 p-8 rounded-2xl relative">
+                    <div class="absolute -top-4 left-8 bg-brand text-white px-4 py-1 rounded-full font-bold text-sm">ДЕНЬ 3</div>
+                    <h3 class="text-2xl font-bold mb-3 mt-2">"Як подобатись собі щоранку»</h3>
+                    <p class="text-gray-300">Як зробити так, щоб свіже і підтягнуте обличчя стало твоєю нормою — а не випадковістю після вдалої ночі. <br><br><span class="font-bold text-white">10-хвилинна система, яку ти забереш і почнеш робити з завтрашнього ранку.</span></p>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button onclick="openModal()" class="bg-brand hover:bg-brandHover text-white text-lg font-bold py-4 px-10 rounded-full transition duration-300 shadow-lg transform hover:scale-105">
+                    Доєднатися
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- БЛОК 4: Автор -->
+    <section class="py-20 px-4 max-w-5xl mx-auto">
+        <div class="flex flex-col md:flex-row items-center gap-10">
+            <div class="md:w-1/2">
+                <!-- ЗАМІНІТЬ ШЛЯХ ДО ФОТО АВТОРА -->
+                <img src="author.jpg" alt="Світлана Гаврилюк" class="rounded-3xl shadow-xl w-full object-cover" loading="lazy">
+            </div>
+            <div class="md:w-1/2">
+                <p class="text-sm text-brand font-bold uppercase tracking-widest mb-2">Автор інтенсиву</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-dark">Світлана Гаврилюк</h2>
+                <p class="text-lg text-gray-700 mb-6">Експертка з природного омолодження, спеціалістка з масажу обличчя та тейпування.</p>
+                <ul class="space-y-4">
+                    <li class="flex items-center gap-3">
+                        <svg class="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span class="font-medium">500+ задоволених учениць</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <svg class="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span class="font-medium">Сертифікована майстриня</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <svg class="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span class="font-medium">Авторка курсу «Антиботокс»</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- БЛОК 5: Результати -->
+    <section class="bg-white py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-dark">Результати моїх учениць</h2>
+            
+            <!-- Swiper -->
+            <div class="swiper resultsSwiper">
+                <div class="swiper-wrapper">
+                    <!-- ЗАМІНІТЬ ШЛЯХИ ДО ФОТО РЕЗУЛЬТАТІВ -->
+                    <div class="swiper-slide"><img src="result1.jpg" alt="Результат 1" class="rounded-2xl mx-auto w-full md:w-2/3 object-cover shadow-md" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="result2.jpg" alt="Результат 2" class="rounded-2xl mx-auto w-full md:w-2/3 object-cover shadow-md" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="result3.jpg" alt="Результат 3" class="rounded-2xl mx-auto w-full md:w-2/3 object-cover shadow-md" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="result4.jpg" alt="Результат 4" class="rounded-2xl mx-auto w-full md:w-2/3 object-cover shadow-md" loading="lazy"></div>
+                    <div class="swiper-slide"><img src="result5.jpg" alt="Результат 5" class="rounded-2xl mx-auto w-full md:w-2/3 object-cover shadow-md" loading="lazy"></div>
+                </div>
+                <!-- Pagination & Navigation -->
+                <div class="swiper-pagination mt-6 relative bottom-0"></div>
+                <div class="swiper-button-next text-brand"></div>
+                <div class="swiper-button-prev text-brand"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- БЛОК 6: FAQ -->
+    <section class="py-20 px-4 max-w-3xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-dark">Запитання та відповіді</h2>
+        
+        <div class="space-y-4 mb-12">
+            <details class="bg-white rounded-xl shadow-sm group p-6 cursor-pointer">
+                <summary class="font-bold text-lg flex justify-between items-center outline-none">
+                    А точно це допоможе від заломів і набряків?
+                    <span class="transition group-open:rotate-180">
+                        <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                    </span>
+                </summary>
+                <p class="text-gray-600 mt-4 leading-relaxed">Так. Ми працюємо з головними причинами — тиском під час сну, м’язовими затисками та застоєм лімфи. Результат видно вже з перших днів.</p>
+            </details>
+
+            <details class="bg-white rounded-xl shadow-sm group p-6 cursor-pointer">
+                <summary class="font-bold text-lg flex justify-between items-center outline-none">
+                    У мене мало часу, я встигатиму робити вправи?
+                    <span class="transition group-open:rotate-180">
+                        <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                    </span>
+                </summary>
+                <p class="text-gray-600 mt-4 leading-relaxed">Так! Щоденні практики займають лише 10–15 хвилин.</p>
+            </details>
+
+            <details class="bg-white rounded-xl shadow-sm group p-6 cursor-pointer">
+                <summary class="font-bold text-lg flex justify-between items-center outline-none">
+                    Це складно? Я ніколи не клеїла тейпи.
+                    <span class="transition group-open:rotate-180">
+                        <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                    </span>
+                </summary>
+                <p class="text-gray-600 mt-4 leading-relaxed">Ні. Всі техніки пояснюються крок за кроком на відео. Усе створено для новачків.</p>
+            </details>
+
+            <details class="bg-white rounded-xl shadow-sm group p-6 cursor-pointer">
+                <summary class="font-bold text-lg flex justify-between items-center outline-none">
+                    А якщо я вже пробувала масажі / тейпи / вправи, але не було ефекту?
+                    <span class="transition group-open:rotate-180">
+                        <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                    </span>
+                </summary>
+                <p class="text-gray-600 mt-4 leading-relaxed">Це нормально. Найчастіше проблема не в техніках, а у відсутності системи. Тут ти зрозумієш, що і в якій послідовності робити, щоб зміни почали зʼявлятись і тримались.</p>
+            </details>
+        </div>
+
+        <div class="text-center">
+            <button onclick="openModal()" class="bg-brand hover:bg-brandHover text-white text-lg font-bold py-4 px-10 rounded-full transition duration-300 shadow-lg transform hover:scale-105">
+                Доєднатися
+            </button>
+        </div>
+    </section>
+
+    <!-- ПОПАП ФОРМА -->
+    <div id="leadModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeModal()"></div>
+        
+        <!-- Modal Content -->
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full relative z-10 shadow-2xl">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-dark">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            
+            <h3 class="text-2xl font-bold text-center mb-6 text-dark">Реєстрація на інтенсив</h3>
+            
+            <form id="leadForm" class="space-y-4">
+                <!-- Hidden UTM fields -->
+                <input type="hidden" name="UTM Source" id="utm_source">
+                <input type="hidden" name="UTM Medium" id="utm_medium">
+                <input type="hidden" name="UTM Campaign" id="utm_campaign">
+                <input type="hidden" name="UTM Content" id="utm_content">
+                <input type="hidden" name="UTM Term" id="utm_term">
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Ім'я</label>
+                    <input type="text" id="name" name="Ім'я" required placeholder="Ваше ім'я" 
+                           class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand focus:border-transparent outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Телефон</label>
+                    <input type="tel" id="phone" name="Телефон" required 
+                           class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand focus:border-transparent outline-none">
+                    <span id="phone-error" class="text-red-500 text-xs hidden mt-1">Невірний номер телефону</span>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Telegram (нікнейм)</label>
+                    <input type="text" name="Telegram" required placeholder="@username" 
+                           class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand focus:border-transparent outline-none">
+                </div>
+
+                <button type="submit" id="submitBtn" class="w-full bg-brand hover:bg-brandHover text-white font-bold py-4 rounded-xl transition duration-300 shadow-md mt-6 relative">
+                    <span id="btnText">Зареєструватися</span>
+                    <!-- Loader -->
+                    <svg id="btnLoader" class="animate-spin h-5 w-5 text-white absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/js/intlTelInput.min.js"></script>
+    
+    <script>
+        // Swiper Init
+        const swiper = new Swiper(".resultsSwiper", {
+            spaceBetween: 30,
+            centeredSlides: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                640: { slidesPerView: 1 },
+                768: { slidesPerView: 1 },
+                1024: { slidesPerView: 1 },
+            }
+        });
+
+        // Modal Logic
+        const modal = document.getElementById('leadModal');
+        function openModal() {
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+        }
+        function closeModal() {
+            modal.classList.add('hidden');
+            document.body.classList.remove('modal-open');
+        }
+
+        // UTM capturing
+        const urlParams = new URLSearchParams(window.location.search);
+        document.getElementById('utm_source').value = urlParams.get('utm_source') || '';
+        document.getElementById('utm_medium').value = urlParams.get('utm_medium') || '';
+        document.getElementById('utm_campaign').value = urlParams.get('utm_campaign') || '';
+        document.getElementById('utm_content').value = urlParams.get('utm_content') || '';
+        document.getElementById('utm_term').value = urlParams.get('utm_term') || '';
+
+        // Name validation (no numbers)
+        const nameInput = document.getElementById('name');
+        nameInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[0-9]/g, '');
+        });
+
+        // Phone validation & IP setup
+        const phoneInput = document.querySelector("#phone");
+        const phoneError = document.querySelector("#phone-error");
+        
+        // Exclude RU and BY, allow European and others
+        const iti = window.intlTelInput(phoneInput, {
+            initialCountry: "auto",
+            excludeCountries: ["ru", "by"], 
+            geoIpLookup: function(callback) {
+                fetch("https://ipapi.co/json")
+                    .then(res => res.json())
+                    .then(data => callback(data.country_code))
+                    .catch(() => callback("ua"));
+            },
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/js/utils.js",
+        });
+
+        // Form Submit Logic to Google Sheets
+        const form = document.getElementById('leadForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const btnLoader = document.getElementById('btnLoader');
+
+        // ВСТАВТЕ СЮДИ ПОСИЛАННЯ НА GOOGLE APPS SCRIPT З КРОКУ 1
+        const scriptURL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            
+            // Validate phone
+            if (!iti.isValidNumber()) {
+                phoneError.classList.remove('hidden');
+                phoneInput.classList.add('border-red-500');
+                return;
+            } else {
+                phoneError.classList.add('hidden');
+                phoneInput.classList.remove('border-red-500');
+            }
+
+            // UI Loading state
+            btnText.classList.add('invisible');
+            btnLoader.classList.remove('hidden');
+            submitBtn.disabled = true;
+
+            // Prepare data
+            let formData = new FormData(form);
+            formData.set('Телефон', iti.getNumber()); // Get full international format
+
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => {
+                    // Redirect to Thank You page
+                    window.location.href = 'thanks.html';
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    alert("Сталася помилка при відправці. Спробуйте ще раз.");
+                    btnText.classList.remove('invisible');
+                    btnLoader.classList.add('hidden');
+                    submitBtn.disabled = false;
+                });
+        });
+    </script>
+</body>
+</html>
