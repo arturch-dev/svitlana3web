@@ -44,7 +44,7 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1548773689373078'); // ЗАМІНІТЬ НА ВАШ ID ПІКСЕЛЯ
+    fbq('init', '1548773689373078');
     fbq('track', 'PageView');
     </script>
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1548773689373078&ev=PageView&noscript=1"/></noscript>
@@ -53,7 +53,6 @@
     <style>
         body { font-family: 'Montserrat', sans-serif; background-color: #f5f3f0; color: #2c2a29; }
         .hero-bg {
-            /* ЗАМІНІТЬ ШЛЯХ ДО ФОТО 1 БЛОКУ */
             background-image: linear-gradient(rgba(44, 42, 41, 0.7), rgba(44, 42, 41, 0.7)), url('main.jpg');
             background-size: cover;
             background-position: center;
@@ -146,7 +145,6 @@
     <section class="py-20 px-4 max-w-5xl mx-auto">
         <div class="flex flex-col md:flex-row items-center gap-10">
             <div class="md:w-1/2">
-                <!-- ЗАМІНІТЬ ШЛЯХ ДО ФОТО АВТОРА -->
                 <img src="author.jpg" alt="Світлана Гаврилюк" class="rounded-3xl shadow-xl w-full object-cover" loading="lazy">
             </div>
             <div class="md:w-1/2">
@@ -179,7 +177,6 @@
             <!-- Swiper -->
             <div class="swiper resultsSwiper">
                 <div class="swiper-wrapper">
-                    <!-- ЗАМІНІТЬ ШЛЯХИ ДО ФОТО РЕЗУЛЬТАТІВ -->
                     <div class="swiper-slide"><img src="feedback1.webp" alt="Результат 1" class="rounded-2xl mx-auto w-full md:w-2/3 object-cover shadow-md" loading="lazy"></div>
                     <div class="swiper-slide"><img src="feedback2.webp" alt="Результат 2" class="rounded-2xl mx-auto w-full md:w-2/3 object-cover shadow-md" loading="lazy"></div>
                     <div class="swiper-slide"><img src="feedback3.webp" alt="Результат 3" class="rounded-2xl mx-auto w-full md:w-2/3 object-cover shadow-md" loading="lazy"></div>
@@ -288,7 +285,7 @@
                 </div>
 
                 <button type="submit" id="submitBtn" class="w-full bg-brand hover:bg-brandHover text-white font-bold py-4 rounded-xl transition duration-300 shadow-md mt-6 relative">
-                    <span id="btnText">Зареєструватися</span>
+                    <span id="btnText">Відправити та перейти в бота</span>
                     <!-- Loader -->
                     <svg id="btnLoader" class="animate-spin h-5 w-5 text-white absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                 </button>
@@ -362,14 +359,17 @@
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/js/utils.js",
         });
 
-        // Form Submit Logic to Google Sheets
+        // Form Submit Logic to Google Sheets & Redirect to Telegram
         const form = document.getElementById('leadForm');
         const submitBtn = document.getElementById('submitBtn');
         const btnText = document.getElementById('btnText');
         const btnLoader = document.getElementById('btnLoader');
 
-        // ВСТАВТЕ СЮДИ ПОСИЛАННЯ НА GOOGLE APPS SCRIPT З КРОКУ 1
+        // !ВАЖЛИВО! ВСТАВТЕ СЮДИ ПОСИЛАННЯ НА ВАШ GOOGLE APPS SCRIPT
         const scriptURL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+        
+        // !ВАЖЛИВО! ВСТАВТЕ СЮДИ ПОСИЛАННЯ НА ВАШОГО ТЕЛЕГРАМ БОТА
+        const telegramBotURL = 'https://t.me/YOUR_BOT_LINK_HERE';
 
         form.addEventListener('submit', e => {
             e.preventDefault();
@@ -393,14 +393,22 @@
             let formData = new FormData(form);
             formData.set('Телефон', iti.getNumber()); // Get full international format
 
+            // Send to Google Sheets
             fetch(scriptURL, { method: 'POST', body: formData })
                 .then(response => {
-                    // Redirect to Thank You page
-                    window.location.href = 'thanks.html';
+                    // Відправляємо подію Lead у Facebook Pixel
+                    if (typeof fbq === 'function') {
+                        fbq('track', 'Lead');
+                    }
+                    
+                    // Затримка півсекунди, щоб Піксель встиг відправити подію, і перенаправляємо в бота
+                    setTimeout(() => {
+                        window.location.href = telegramBotURL;
+                    }, 500);
                 })
                 .catch(error => {
                     console.error('Error!', error.message);
-                    alert("Сталася помилка при відправці. Спробуйте ще раз.");
+                    alert("Сталася помилка при відправці. Перевірте з'єднання з інтернетом або спробуйте пізніше.");
                     btnText.classList.remove('invisible');
                     btnLoader.classList.add('hidden');
                     submitBtn.disabled = false;
